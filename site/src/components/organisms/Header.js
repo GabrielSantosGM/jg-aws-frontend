@@ -4,7 +4,7 @@ import '../../assets/css/override.css'
 import { Colors } from '../../shared/Colors';
 import { Input } from 'antd';
 import { UserOutlined, HeartOutlined, ShoppingOutlined, MenuOutlined } from "@ant-design/icons";
-import LogoRosa from '../../assets/img/logo-rosa.svg'
+import LogoRosa from '../../assets/img/logo.png'
 import { useHistory } from 'react-router';
 import { Drawer } from 'antd';
 import { EmptyStateBag } from '../molecules/EmptyStateBag';
@@ -65,7 +65,7 @@ padding: 0 2%;
 font-family: 'Exo 2', sans-serif;
 `
 
-const ContainerHeader = styled.div `
+const ContainerHeader = styled.div`
 max-width: 1600px;
 height: 100%;
 margin: 0 auto;
