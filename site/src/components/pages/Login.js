@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import './../../assets/css/override.css'
 import styled from "styled-components";
 import { Colors } from "../../shared/Colors";
@@ -6,27 +6,68 @@ import { Header } from "../organisms/Header";
 import { Button } from '../atoms/Button';
 import { Input } from "antd";
 import { useHistory } from "react-router";
+import { User } from "../../services/User";
 
 const Login = () => {
-
     const history = useHistory()
+    const [loading, setLoading] = useState(false)
+    const [email, setEmail] = useState('')
+    const [senha, setSenha] = useState('')
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+        setLoading(true)
+
+        let data = {
+            email: email,
+            senha: senha
+        }
+
+        const response = await User.signInUser(data)
+
+        if (response.status) {
+            console.log('login realizado com sucesso!')
+            setLoading(false)
+            alert('Login efetuado com sucesso')
+            history.push('/')
+        } else {
+            console.log('erro ao login')
+            setLoading(false)
+            alert('Email ou senha inválidos, tente novamente')
+        }
+    }
+
+
     return (
         <>
             <Header />
             <CadastroPage>
                 <ContainerLogin>
-                    <FormLogin>
+                    <FormLogin onSubmit={handleSubmit}>
                         <h3>Bem vindo de volta :)</h3>
                         <div className='input-login'>
                             <label>Email</label>
-                            <Input type='email' />
+                            <Input
+                                value={email}
+                                onChange={e => setEmail(e.target.value)}
+                                id="email"
+                                name="email"
+                                required
+                                type='email' />
                         </div>
                         <div className='input-login'>
                             <label>Senha</label>
-                            <Input type='password' />
+                            <Input
+                                value={senha}
+                                onChange={e => setSenha(e.target.value)}
+                                id="senha"
+                                name="senha"
+                                required
+                                type='password' />
                         </div>
                         <span className='options-login'>Esqueci minha senha</span>
-                        <Button style={{ width: '100%', margin: '30px 0' }} contentText='ENTRAR' />
+                        <Button style={{ width: '100%', margin: '30px 0' }} contentText='ENTRAR' loading={loading} />
                         <span className='options-login'>Não possui uma conta? <u onClick={() => history.push('/cadastro')}>Cadastre-se!</u></span>
                     </FormLogin>
                 </ContainerLogin>
