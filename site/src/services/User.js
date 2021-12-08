@@ -53,4 +53,73 @@ export const User = {
             }
         }
     },
+
+    async logoutUser(id) {
+
+        if(
+            !id
+        ) {
+            throw Error('É necessário o id do usuário para fazer logout')
+        }
+
+        try {
+            const response = await api.post(`/account/logout/${id}`)
+            return {
+                status: response.status
+            }
+        } catch(err) {
+            console.log('Erro:', err)
+            return {
+                status: false
+            }
+        }
+    },
+
+
+    async getInfoUser(id) {
+        try {
+            const response = await api.get(`/account/${id}`)
+            return {
+                status: response.status,
+                data: response.data
+            }
+        } catch(err) {
+            console.log('Erro:', err)
+            return {
+                status: false
+            }
+        }
+    },
+
+    async getAddressesByUser(id) {
+        try {
+            const response = await api.get(`/addresses/address/${id}`)
+            return {
+                status: response.status,
+                data: response.data
+            }
+        } catch(err) {
+            console.log('Erro:', err)
+            return {
+                status: false
+            }
+        }
+    },
+
+    async putPasswordByUser(id, password) {
+        try {
+            const response = await api.patch(`/account/${id}?password=${password}`)
+            return {
+                status: response.status
+            }
+
+        } catch(err) {
+            console.log('Erro:', err)
+            return {
+                status: false
+            }
+        }
+    }
+
+
 }

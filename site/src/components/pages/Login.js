@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './../../assets/css/override.css'
 import styled from "styled-components";
 import { Colors } from "../../shared/Colors";
@@ -27,17 +27,17 @@ const Login = () => {
         const response = await User.signInUser(data)
 
         if (response.status) {
-            console.log('login realizado com sucesso!')
+            console.log('login realizado com sucesso!', response.data)
             setLoading(false)
-            alert('Login efetuado com sucesso')
-            history.push('/')
+            sessionStorage.setItem('idUser', response.data.idUsuario)
+            sessionStorage.setItem('username', response.data.nome)
+            history.push('/perfil')
         } else {
             console.log('erro ao login')
             setLoading(false)
             alert('Email ou senha inválidos, tente novamente')
         }
     }
-
 
     return (
         <>
@@ -79,13 +79,17 @@ const Login = () => {
 export default Login;
 
 const CadastroPage = styled.div`
-padding-top: 85px;
+padding-top: 68px;
 background-color: ${Colors.gray.darkPurple};
 height: 100vh;
 display: flex;
 align-items: center;
 justify-content: center;
 font-family: 'Exo 2', sans-serif;
+
+@media(min-width: 768px) {
+    padding-top: 82px;
+}
 `
 
 const ContainerLogin = styled.div`

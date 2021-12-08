@@ -41,9 +41,9 @@ const Cadastro = () => {
 
         if (response.status) {
             console.log('cadastro realizado com sucesso!')
-            alert('Cadastro realizado com sucesso!')
+            alert('Cadastro realizado com sucesso! Faça login para continuar')
             setLoading(false)
-            history.push('/')
+            history.push('/login')
         } else {
             setLoading(false)
             alert('Erro ao cadastrar, tente novamente')
@@ -147,12 +147,16 @@ const Cadastro = () => {
 export default Cadastro;
 
 const CadastroPage = styled.div`
-padding-top: 85px;
+padding-top: 68px;
 background-color: ${Colors.gray.darkPurple};
 font-family: 'Exo 2', sans-serif;
 width: 100%;
 min-height: 100vh;
 display: flex;
+
+@media(min-width: 768px) {
+    padding-top: 82px;
+}
 `
 const ContainerCadastro = styled.div`
 display: flex;

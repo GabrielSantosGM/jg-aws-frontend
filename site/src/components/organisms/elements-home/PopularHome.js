@@ -17,7 +17,7 @@ export function PopularHome() {
             setData(response.data)
             setLoading(false)
         } else {
-            console.log('erro ao cadastrar')
+            console.log('erro ao carregar produtos populares')
         }
     }
     useEffect(() => {
@@ -42,10 +42,9 @@ export function PopularHome() {
                             :
                             data.map((product) => {
                                 return (
-                                    <CardProduto title={product.nomeProduto} preco={product.preco} />
+                                    <CardProduto id={product.idProduto} title={product.nomeProduto} preco={product.preco} img={product.imagens[0]} />
                                 )
                             })
-
                     }
                 </div>
             </PopularSection>

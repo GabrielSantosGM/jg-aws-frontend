@@ -9,7 +9,7 @@ export const Product = {
                 status: response.status,
                 data: response.data
             }
-        } catch(err) {
+        } catch (err) {
             console.log('Erro:', err)
             return {
                 status: false
@@ -24,7 +24,22 @@ export const Product = {
                 status: response.status,
                 data: response.data
             }
-        } catch(err) {
+        } catch (err) {
+            console.log('Erro:', err)
+            return {
+                status: false
+            }
+        }
+    },
+
+    async getPromotionProducts() {
+        try {
+            const response = await api.get(`/filter/promotion`)
+            return {
+                status: response.status,
+                data: response.data
+            }
+        } catch (err) {
             console.log('Erro:', err)
             return {
                 status: false
@@ -39,7 +54,7 @@ export const Product = {
                 status: response.status,
                 data: response.data
             }
-        } catch(err) {
+        } catch (err) {
             console.log('Erro:', err)
             return {
                 status: false
@@ -54,7 +69,7 @@ export const Product = {
                 status: response.status,
                 data: response.data
             }
-        } catch(err) {
+        } catch (err) {
             console.log('Erro:', err)
             return {
                 status: false
@@ -62,4 +77,107 @@ export const Product = {
         }
     },
 
+    async calculateShipping(cep) {
+
+        try {
+            const response = await api.post(`/products/frete/${cep}`)
+            return {
+                status: response.status,
+                data: response.data
+            }
+        } catch (err) {
+            console.log('Erro:', err)
+            return {
+                status: false
+            }
+        }
+    },
+
+    async addProductBag(user, product, quantity, size) {
+
+        try {
+            const response = await api.post(`/products/add-product/${user}/${product}/${quantity}/${size}`)
+            return {
+                status: response.status
+            }
+        } catch (err) {
+            console.log('Erro:', err)
+            return {
+                status: false
+            }
+        }
+    },
+
+    async getProductsBag(idUser) {
+        try {
+            const response = await api.get(`/purchases/${idUser}`)
+            return {
+                status: response.status,
+                data: response.data
+            }
+        } catch (err) {
+            console.log('Erro:', err)
+            return {
+                status: false
+            }
+        }
+    },
+
+    async deleteProductBag(idUser, idProduct, qt, size) {
+        try {
+            const response = await api.delete(`/purchases/${idUser}/${idProduct}/${qt}/${size}`)
+            return {
+                status: response.status
+            }
+        } catch (err) {
+            console.log('Erro:', err)
+            return {
+                status: false
+            }
+        }
+    },
+
+    async getCoupon(coupon) {
+        try {
+            const response = await api.get(`/coupons/${coupon}`)
+            return {
+                status: response.status,
+                data: response.data
+            }
+        } catch (err) {
+            console.log('Erro:', err)
+            return {
+                status: false
+            }
+        }
+    },
+
+    async getFavorites(idUser) {
+        try {
+            const response = await api.get(`/favorites/${idUser}`)
+            return {
+                status: response.status,
+                data: response.data
+            }
+        } catch (err) {
+            console.log('Erro:', err)
+            return {
+                status: false
+            }
+        }
+    },
+
+    async addFavoriteProduct(idUser, idProduct) {
+        try {
+            const response = await api.post(`/products/${idUser}/${idProduct}`)
+            return {
+                status: response.data.status,
+            }
+        } catch (err) {
+            console.log('Erro:', err)
+            return {
+                status: false
+            }
+        }
+    },
 }

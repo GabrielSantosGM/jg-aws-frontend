@@ -11,7 +11,7 @@ export function PromotionsHome() {
     const [loading, setLoading] = useState(true)
 
     async function getProductInfo() {
-        const response = await Product.getAllProducts()
+        const response = await Product.getPromotionProducts()
 
         if (response.status) {
             setData(response.data)
@@ -41,7 +41,7 @@ export function PromotionsHome() {
                             :
                             data.slice(0, 4).map((product) => {
                                 return (
-                                    <CardProduto title={product.nomeProduto} preco={product.preco} loading={loading} />
+                                    <CardProduto id={product.idProduto} title={product.nomeProduto} preco={product.preco} img={product.imagens[0]} />
                                 )
                             })
 

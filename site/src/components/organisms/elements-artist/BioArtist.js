@@ -1,24 +1,29 @@
 import styled from "styled-components";
 import { NameTitle, SecondaryTitle } from "../../atoms/Titles";
+import { Skeleton } from "antd";
 
-export function BioArtist() {
+export function BioArtist(props) {
+    const {
+        bio,
+        contact,
+        skills,
+        loading,
+        software
+    } = props
     return (
         <>
             <ArtistBio>
                 <TopicBio>
                     <NameTitle text='Resumo' />
-                    <SecondaryTitle text='Artista freelancer, tatuador, apaixonado em arte digital.' />
+                    {loading ? <Skeleton active={true} style={{width: 200}} /> : <SecondaryTitle text={bio} />}
                 </TopicBio>
                 <TopicBio>
                     <NameTitle text='Contato' />
-                    <SecondaryTitle text='gabriel.santos@gmail.com' />
+                    {loading ?<Skeleton.Input style={{ width: 150 }} active={true} size="small" /> : <SecondaryTitle text={contact} />}
                 </TopicBio>
                 <TopicBio>
                     <NameTitle text='Skills' />
-                    <SecondaryTitle text='Arte digital, Ilustração' />
-                </TopicBio>
-                <TopicBio>
-                    <NameTitle text='Software' />
+                    {loading ? <Skeleton.Input style={{ width: 150 }} active={true} size="small" />: <SecondaryTitle text={skills} />}
                 </TopicBio>
             </ArtistBio>
         </>

@@ -3,12 +3,15 @@ import { NameTitle, SecondaryTitle } from '../atoms/Titles'
 import { TwitterOutlined, InstagramFilled } from '@ant-design/icons'
 import { Colors } from '../../shared/Colors'
 import BgProfile from '../../assets/img/bg-section-artist.jpeg'
+import { Skeleton } from 'antd'
 
 export function ProfileArtist(props) {
     const {
         name,
+        username,
         pic,
         bio,
+        loading,
         twitter,
         instagram
     } = props
@@ -17,9 +20,20 @@ export function ProfileArtist(props) {
         <>
             <ContainerProfile>
                 <ProfileBox>
-                    <img src={pic} />
-                    <NameTitle text={name} />
-                    <SecondaryTitle text={bio} />
+                    {loading ?
+                        <>
+                            <Skeleton.Image />
+                            <Skeleton.Input style={{ width: 200, margin: 20 }} active={true} size="small" />
+                            <Skeleton.Input style={{ width: 300, marginBottom: 20 }} active={true} size="small" />
+                        </>
+                        :
+                        <>
+                            <img src={pic} />
+                            <NameTitle text={`${username} (${name})`} />
+                            <SecondaryTitle text={bio} />
+                        </>
+
+                    }
                     <NetworkBox>
                         <TwitterOutlined style={Network} />
                         <InstagramFilled style={Network} />
@@ -40,7 +54,7 @@ align-items: flex-end;
 justify-content: center;
 `
 
-const ProfileBox = styled.div `
+const ProfileBox = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
@@ -54,9 +68,13 @@ img {
     border: 2px solid ${Colors.gray.white};
     margin-bottom: 10px;
 }
+.ant-skeleton-element .ant-skeleton-image {
+    width: 100px;
+    height: 100px;
+}
 `
 
-const NetworkBox = styled.div ` 
+const NetworkBox = styled.div` 
 
 `
 
