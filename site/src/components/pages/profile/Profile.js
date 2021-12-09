@@ -16,6 +16,8 @@ import MyAddresses from "./MyAddresses";
 import SetPassword from "./SetPassword";
 import MyFavorites from "./MyFavorites";
 import { User } from "../../../services/User";
+import { FormAddress } from "../../organisms/FormAddress";
+import { MyOrders } from "./MyOrders";
 
 const { SubMenu } = Menu;
 
@@ -90,7 +92,10 @@ const Profile = () => {
                                 }}>Alterar senha</Menu.Item>
                             </SubMenu>
                             <SubMenu key="sub2" icon={<SkinOutlined />} title="Minhas Compras">
-                                <Menu.Item key="5">Acompanhar pedidos</Menu.Item>
+                                <Menu.Item key="5" onClick={() => {
+                                    if (window.screen.width <= 768) setCollapsed(true)
+                                    history.push('/perfil/pedidos')
+                                }}>Acompanhar pedidos</Menu.Item>
                                 <Menu.Item key="6" onClick={() => {
                                     if (window.screen.width <= 768) setCollapsed(true)
                                     history.push('/perfil/favoritos')
@@ -107,8 +112,10 @@ const Profile = () => {
                     collapsed={collapsed}>
                     <Route exact path='/perfil' component={Settings} />
                     <Route path='/perfil/meus-enderecos' component={MyAddresses} />
+                    <Route path='/perfil/adicionar-endereco' component={FormAddress} />
                     <Route path='/perfil/alterar-senha' component={SetPassword} />
                     <Route path='/perfil/favoritos' component={MyFavorites} />
+                    <Route path='/perfil/pedidos' component={MyOrders} />
                 </PageProfile>
             </UserProfile>
             <ModalContainer>
@@ -182,7 +189,6 @@ display: none;
 const PageProfile = styled.section`
 display: ${props => props.collapsed ? 'block' : 'none'};
 width: 100%;
-height: 100vh;
 overflow-y: scroll;
 padding: 20px;
 

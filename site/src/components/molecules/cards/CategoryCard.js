@@ -22,29 +22,48 @@ export function CategoryCard(props) {
     )
 }
 const CardContainer = styled.div `
-width: 250px;
-height: 250px;
+width: 100%;
+height: 115px;
+margin: 8px 30px;
 object-fit: cover;
 overflow: hidden;
-margin: 10px;
 cursor: pointer;
+
+@media(min-width: 768px) {
+    width: 250px;
+    height: 250px;
+    margin: 15px;
+}
 `
 const CardImage = styled.div`
 background-image: url(${props => props.image});
-background-position: center;
+background-position: start;
 background-size: cover;
-width: 250px;
-height: 250px;
+width: 100%;
+height: 115px;
 transition: 0.5s all;
 filter: grayscale(1);
 border-radius: 4px;
+
+@media(min-width: 768px) {
+    width: 250px;
+    height: 250px;
+    background-position: center;
+}
 `
 
 const CardText = styled.div `
-width: 250px;
-height: 250px;
-padding: 20px;
+width: 100%;
+height: 115px;
+padding: 12px;
 display: flex;
 align-items: flex-end;
+
+@media(min-width: 768px) {
+    width: 250px;
+    height: 250px;
+    padding: 20px;
+    background-position: center;
+}
 
 `

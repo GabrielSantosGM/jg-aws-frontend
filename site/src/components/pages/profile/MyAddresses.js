@@ -6,11 +6,13 @@ import { Colors } from "../../../shared/Colors"
 import { useEffect, useState } from "react"
 import { User } from "../../../services/User"
 import { Empty } from "antd"
+import { useHistory } from "react-router"
 
 const MyAddresses = () => {
     const idUser = sessionStorage.getItem('idUser')
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
+    const history = useHistory()
 
     async function getAllAddresses() {
         const response = await User.getAddressesByUser(idUser)
@@ -27,7 +29,7 @@ const MyAddresses = () => {
         <>
             <ContainerAddAddress>
                 <SubTitle text='Meus endereços' />
-                <PlusCircleOutlined style={AddAddress} />
+                <PlusCircleOutlined style={AddAddress} onClick={() => history.push('/perfil/adicionar-endereco')} />
             </ContainerAddAddress>
             <AddressPage>
                 {
@@ -44,7 +46,7 @@ const MyAddresses = () => {
                                 )
                             })
                             : 
-                            <Empty style={{ margin: "50px" }} description="Você não possui endereços cadastrados, adicione um novo para comprar " />
+                            <Empty style={{ margin: "50px", color: '#fff' }} description="Você não possui endereços cadastrados, adicione um novo para comprar " />
                 }
             </AddressPage>
         </>
